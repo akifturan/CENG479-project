@@ -1,0 +1,16 @@
+# Java build output
+out/
+*.class
+
+# Generated large sample/demo input images
+images/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+Thumbs.db
+.DS_Store
