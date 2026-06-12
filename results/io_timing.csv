@@ -1,0 +1,3 @@
+operation,size,time_ms
+encode,4096,4648
+decode,4096,1621
