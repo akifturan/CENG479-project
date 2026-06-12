@@ -12,6 +12,8 @@ public record ConvolutionTask(int[] in, int[] out, int w, int h, Filter f, int y
         implements Callable<Void> {
     @Override
     public Void call() {
+        // EN: a worker thread computes its own stripe of rows (data parallelism, Week 10)
+        // TR: bir işçi thread kendi satır şeridini hesaplar (veri paralelliği, Hafta 10)
         Convolver.convolveRows(in, out, w, h, f, yStart, yEnd);
         return null;
     }

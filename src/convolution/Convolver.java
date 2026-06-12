@@ -10,6 +10,12 @@ package convolution;
  */
 public final class Convolver {
 
+    // EN: each output pixel depends only on the read-only input -> fully independent work
+    //     (embarrassingly parallel, Week 10). The same routine is used by the sequential
+    //     baseline and by every parallel worker, so results are guaranteed identical.
+    // TR: her çıktı pikseli yalnızca salt-okunur girdiye bağlı -> tümüyle bağımsız iş
+    //     (embarrassingly parallel, Hafta 10). Aynı fonksiyonu hem sıralı baseline hem de
+    //     her paralel işçi kullanır, bu yüzden sonuçların aynı olması garantidir.
     public static void convolveRows(int[] in, int[] out, int w, int h, Filter f, int yStart, int yEnd) {
         if (f.sobel) sobelRows(in, out, w, h, f.gx, f.gy, yStart, yEnd);
         else         linearRows(in, out, w, h, f.kernel, yStart, yEnd);
@@ -70,6 +76,10 @@ public final class Convolver {
         }
     }
 
+    // EN: sequential baseline = one thread does all rows. This is T(1), the reference
+    //     for speedup S(n) = T(1)/T(n) (Week 2 - Performance).
+    // TR: sıralı baseline = tek thread tüm satırları yapar. Bu T(1)'dir; speedup
+    //     S(n) = T(1)/T(n) hesabının referansıdır (Hafta 2 - Performans).
     public static int[] convolveSequential(PixelImage src, Filter f) {
         int[] out = new int[src.pixels.length];
         convolveRows(src.pixels, out, src.width, src.height, f, 0, src.height);

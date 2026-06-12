@@ -13,6 +13,10 @@ import java.util.Random;
  * worker thread's memory access contiguous (cache-friendly).
  */
 public final class PixelImage {
+    // EN: pixels are packed (one int per pixel) and stored row by row (row-major). Threads
+    //     then read/write contiguous memory -> good cache locality (Week 9 - Cache).
+    // TR: pikseller paketli (piksel başına tek int) ve satır satır (row-major) tutulur.
+    //     Böylece threadler ardışık belleğe erişir -> iyi cache lokalitesi (Hafta 9 - Cache).
     public final int width;
     public final int height;
     public final int[] pixels; // packed 0xRRGGBB, length = width*height

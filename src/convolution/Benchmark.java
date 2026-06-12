@@ -36,6 +36,8 @@ public final class Benchmark {
                     for (int n : THREADS) {
                         double ms = measure(img, f, n);
                         if (n == 1) t1 = ms;
+                        // EN: speedup S(n) = T(1)/T(n); efficiency E(n) = S(n)/n (Week 2 - Performance)
+                        // TR: speedup S(n) = T(1)/T(n); verimlik E(n) = S(n)/n (Hafta 2 - Performans)
                         double sp = t1 / ms, eff = sp / n;
                         csv.printf("%s,%d,%d,%.3f,%.4f,%.4f%n", f.name, s, n, ms, sp, eff);
                         csv.flush();
@@ -70,6 +72,10 @@ public final class Benchmark {
 
     /** Separate I/O timing (the Amdahl sequential-fraction component). */
     static void runIoTiming() throws Exception {
+        // EN: image decode/encode is NOT parallelized -> it is the fixed sequential part
+        //     that caps overall speedup (Amdahl's Law, Week 2). Measured separately.
+        // TR: görüntü decode/encode paralelleştirilmez -> genel speedup'ı sınırlayan sabit
+        //     sıralı kısımdır (Amdahl Yasası, Hafta 2). Ayrı ölçülür.
         PixelImage img = PixelImage.generate(4096, SEED);
         long t0 = System.nanoTime();
         img.save("images/io_sample_4096.png");
@@ -88,6 +94,8 @@ public final class Benchmark {
     static double measure(PixelImage img, Filter f, int n) throws Exception {
         ExecutorService pool = (n == 1) ? null : Executors.newFixedThreadPool(n);
         try {
+            // EN: warm-up runs let the JVM JIT-compile the hot loop before we time it.
+            // TR: ısınma koşuları, ölçümden önce JVM'in sıcak döngüyü JIT-derlemesini sağlar.
             for (int w = 0; w < WARMUP; w++) run(img, f, n, pool);
             double[] t = new double[REPS];
             for (int r = 0; r < REPS; r++) {

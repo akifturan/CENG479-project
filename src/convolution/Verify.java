@@ -23,6 +23,10 @@ public final class Verify {
                 } finally {
                     pool.shutdown();
                 }
+                // EN: parallel output must be byte-identical to sequential -> proves there is
+                //     no race condition / data hazard on the shared output (Week 5 - Threads).
+                // TR: paralel çıktı sıralıyla byte byte aynı olmalı -> paylaşılan çıktıda race
+                //     condition / veri tehlikesi olmadığını kanıtlar (Hafta 5 - Threads).
                 boolean ok = Arrays.equals(seq, par);
                 allOk &= ok;
                 System.out.printf("%-12s %dT : %s%n", f.name, n, ok ? "PASS" : "FAIL");
