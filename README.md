@@ -21,6 +21,7 @@ and explains the results with core parallel-programming concepts.
 - [Results at a glance](#results-at-a-glance)
 - [Project structure](#project-structure)
 - [Components](#components)
+- [Test data and results](#test-data-and-results)
 - [Requirements](#requirements)
 - [Build and Run](#build-and-run)
 - [How it works (design)](#how-it-works-design)
@@ -100,6 +101,24 @@ identical output.
 ### Plotting
 `analysis/plot.py` reads the CSVs and renders speedup-vs-threads, efficiency, speedup-vs-size,
 and kernel-sweep charts to `results/`.
+
+## Test data and results
+
+This project does **not** use an external image dataset. All input images are generated
+**synthetically and deterministically in code**, so every benchmark is fully reproducible
+without downloading any data file:
+
+- `PixelImage.generate(size, seed)` — a gradient + pseudo-random-noise image used for all
+  benchmark runs (fixed seed `42`), at sizes 512², 2048², 4096², and 8192².
+- `PixelImage.generateShapes(size)` — a shapes image used by the visual demo so the filter
+  effects are clearly visible.
+
+The measured data produced by the benchmark is committed under `results/`:
+
+- `results/benchmark.csv` — time, speedup, efficiency for all 64 matrix cells
+- `results/kernel_sweep.csv` — Gaussian kernel-size sweep (k = 3, 5, 7, 15)
+- `results/io_timing.csv` — PNG encode/decode timing
+- `results/*.png` — the generated speedup, efficiency, and comparison charts
 
 ## Requirements
 
