@@ -1,11 +1,29 @@
 # Parallel 2D Image Convolution — Java Threads
 
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
+![Threads](https://img.shields.io/badge/Threads-ExecutorService-blueviolet)
+![Speedup](https://img.shields.io/badge/Speedup-6.43%C3%97-success)
+
 A multi-threaded 2D image-convolution engine that compares a **sequential baseline**
 against a **parallel implementation** on a multi-core CPU. The project benchmarks
 speedup and efficiency across four filters, four image sizes, and four thread counts,
 and explains the results with core parallel-programming concepts.
 
 > CENG-479 Parallel Programming — Spring 2026 term project.
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Results at a glance](#results-at-a-glance)
+- [Project structure](#project-structure)
+- [Components](#components)
+- [Requirements](#requirements)
+- [Build and Run](#build-and-run)
+- [How it works (design)](#how-it-works-design)
 
 ---
 
@@ -89,7 +107,7 @@ and kernel-sweep charts to `results/`.
 - **Python 3.12+** with `pandas` and `matplotlib` (for plotting only)
 - Windows with PowerShell (the helper scripts are `.ps1`)
 
-## Build & Run
+## Build and Run
 
 ```powershell
 # 1) Compile
